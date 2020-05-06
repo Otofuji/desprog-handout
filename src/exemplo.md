@@ -39,6 +39,8 @@ O cabeçote queimou
 *Ah, que saudade desse cheiro de neurônio queimado… A última vez que senti esse cheiro faz tempo: foi ontem, fazendo embarcados.*
 
 Se você não conseguiu chegar em uma conclusão, não se desespere. Não era para chegar em conclusão alguma. A demonstração acima foi propositalmente feita pulando vários passos apenas para confundir. 
+    
+>IMAGEM MEME NAZARÉ AQUI
 
 Talvez ficasse mais claro se fizéssemos uma demonstração mais detalhada sem pular os passos. Afinal, tudo isso lhe parece familiar, não é mesmo? Trabalhamos semestre passado com a Lei da Gravitação Universal na aula 2 de Eletromag e você deve se lembrar disso. Ou talvez não... não vou te julgar se você não lembra dessa aula em específico de 7 de agosto de 2019. 
 
@@ -80,7 +82,7 @@ Isso mesmo, as caixas tombarão também. Mais do que isso, ficarão dispostas nu
 
 Vamos começar pensando numa coisa um pouco mais organizada que o baú de um caminhão. Um ábaco, disposto como na imagem. Cada coluna imaginária representa um índice de um vetor e a quantidade de discos em cada coluna imaginária representa o valor do inteiro positivo existente em cada índice do vetor. 
 
-    {IMAGEM ÁBACO – "SERÁ PRODUZIDA POSTERIORMENTE"}
+>IMAGEM ÁBACO AQUI
 
 Sem manipular cada disco, pense numa forma de, apenas usando a gravidade, ordenar crescentemente esse vetor, usando essa ideia de que cada coluna representa um índice.
 
@@ -102,11 +104,13 @@ Essa é a ideia central do funcionamento do Gravity Sort. Esse algoritmo também
 
 Aqui uma animação que representa a ideia.
 
-    {ANIMAÇÃO ÁBACO – "SERÁ PRODUZIDA POSTERIORMENTE"}
+>ANIMAÇÃO ÁBACO AQUI
 
 Aqui outra animação que representa o algoritmo para entradas maiores.
 
-    {ANIMAÇÃO ALGORITMO – "SERÁ PRODUZIDA POSTERIORMENTE"}
+>ANIMAÇÃO ALGORITMO AQUI
+
+***
 
 >PERGUNTA: Se estamos lidando com o conteúdo de cada índice do vetor como o número de discos existentes no ábaco, será que existe algum tipo de restrição quanto a que tipo de conteúdo do vetor o Gravity Sort funciona?
 
@@ -129,15 +133,51 @@ Claro, podemos pensar em algumas alternativas de gambiarra para adaptar o códig
 
 Se for executado em hardware especializado, há garantia de que tenha complexidade $$O(n)$$, onde $$n$$ é o número de elementos do vetor. No exemplo, seria $$n = 5$$. Caso contrário, a implementação em software tem complexidade $$O(s)$$, onde $$s$$ é a soma de todos os elementos inteiros do vetor. No exemplo, seria $$s = 5 + 4 + 3 + 2 + 1 = 15.$$
 
-Para nossa análise didática, podemos simplificar essa afirmação valendo-se das regras de simplificação do Hashimoto e considerar, grosso modo, que o Gravity Sort tem complexidade $$O(n)$$ para todos os casos.
-
 O uso de memória, porém, é $$O(n^2)$$. Um ponto curioso de sua complexidade é que no seu pior caso ele, apesar da complexidade linear, consegue ser mais rápido que $$O(n log n)$$, de acordo com demonstrações de desempenho. Isso é possível porque o Gravity Sort explora a estrutura de lidar sempre com inteiros positivos. 
 
 Pensando em software, a implementação do algoritmo em si tem uma questão: ok, a ideia parece interessante, mas como fazer isso dado um vetor na entrada da função?
 
->PERGUNTA: Proponha uma estrutura de dados que possa ser usada dentro da função para alocar os inteiros do vetor a ser ordenado que permita a implementação dessa estrutura de ábaco.
+De acordo com a [Wikipédia](https://en.wikipedia.org/wiki/Bead_sort#Implementation), podemos pensar em uma lista em Python com uma sequência de inteiros. A função retorna uma nova lista (ao invés de transmutar na própria lista de entrada), embora seja possível para uma operação *inplace*.
 
-**Dica:** pense em termos de vetores, matrizes, lista ligada etc., e então em uma forma (alto nível, sem implementação em código propriamente dita) de que essa estrutura possa ser usada para implementar em software o Gravity Sort.
+    def gravity_sort(input_list):
+    
+        return_list = []
+        
+        transposed_list = [0] * max(input_list)
+        
+        for num in input_list:
+            transposed_list[:num] = [n + 1 for n in transposed_list[:num]]
+
+        for _ in input_list:
+            return_list.append(sum(n > 0 for n in transposed_list))
+            transposed_list = [n - 1 for n in transposed_list]
+
+        return return_list
+
+Vamos destrinchar o que está acontecendo aqui. Como dissemos, não faremos uma operação *inplace*, mas sim retornaremos uma nova lista ordenada após a operação do Gravity Sort. Por isso, chamamos `return_list = []` e inicializamos uma lista transporta `transposed_list = [0] * max(input_list)` que é tão alta quanto o maior valor existente na lista. Isso é para podermos simular o tal do ábaco.
+
+Nessa implementação em software, temos dois loops `for`. Vamos analisar um por um.
+
+No primeiro `for`, 
+
+    for num in input_list:
+        transposed_list[:num] = [n + 1 for n in transposed_list[:num]]
+
+estamos vendo para cada elemento da lista de entrada (cada coluna do ábaco), estamos incrementando tantos elementos da `transposed_list` quanto à sua altura. Neste loop, estamos virando o ábaco de lado para que o efeito da gravidade atue. 
+
+Agora que os discos caíram, precisamos des-transpor para termos uma lista normal novamente. Para isso, contamos a partir da linha mais baixa dos discos de ábaco caídos e removemos essa linha subtraindo 1 de cada coluna da `transposed_list`. Quando a coluna não é alta o suficiente para a linha atual, seu valor na `transposed_list`será menor que zero. Ou seja:
+
+    for _ in input_list:
+        return_list.append(sum(n > 0 for n in transposed_list))
+        transposed_list = [n - 1 for n in transposed_list]
+
+Contando valores maiores que zero é a forma que temos de dizer quantos discos estão na linha mais baixa. Em Python, booleanos podem ser avaliados como inteiros. Ou seja: `True == 1` e `False == 0`. Removemos a linha mais baixa ao subtrair 1 de cada elemento.
+
+Nesta implementação, a lista retornada está ordenada em ordem decrescente. Voltando para a ideia do ábaco, é como se tivéssemos girado o ábaco para a esquerda, ao invés da direita. Isso mostra que podemos ordenar tanto de um lado quanto do outro
+
+>PERGUNTA: Sabemos que originalmente o Gravity Sort foi pensado como uma implementação em hardware. Se o Gravity Sort é tão simples e intuitivo e tão bom em complexidade, por que ele não é amplamente usado, assim como o Quick Sort, por exemplo?
+
+**Dica**: Observe a implementação apresentada em Python e tente ver qual complexidade o algoritmo fica implementando dessa forma para entradas particularmente grandes. Essa é uma complexidade linear?
 
 ***
 
@@ -148,12 +188,16 @@ Não continue até ser validado.
 
 ###
 
+>REMOVE BEFORE FLIGHT
+
 Fim do handout
 --------------------
 
 >Fim do handout
 
 Fim do handout
+
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tincidunt, eros porta scelerisque efficitur, nisi dolor eleifend eros, in dictum sapien ex id sapien. Fusce pharetra efficitur mattis. Proin vel justo lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras porta ac tellus quis congue. In bibendum mauris sit amet augue tempor, eget rutrum velit tempus. Mauris pharetra laoreet condimentum. Nam nec dignissim magna. Nulla vitae lectus et eros feugiat euismod vel eget dui. Vestibulum venenatis condimentum luctus. Suspendisse commodo ipsum et nisl porttitor tincidunt. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nec accumsan ante, sit amet condimentum ante. Curabitur ultrices felis at nibh auctor, a finibus dui hendrerit.
 
@@ -224,6 +268,8 @@ Sed vel ligula mauris. Ut faucibus justo quis tellus posuere scelerisque. Pellen
 
 ###
 
+>REMOVE BEFORE FLIGHT
+
 Exemplo Hashimoto
 --------------------
 
@@ -273,3 +319,5 @@ A notação para criar
 ![uma imagem](exemplo.png)
 
 é bem parecida. Espera-se que todas as imagens estejam na pasta *img*.
+
+>REMOVE BEFORE FLIGHT
