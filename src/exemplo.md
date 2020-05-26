@@ -1,52 +1,10 @@
 Gravity Sort
 =================
 
-Aquecendo o carburador
+De volta à Natureza
 --------------------
-Hoje trataremos do Gravity Sort, um algoritmo de ordenação de vetores que, como o nome sugere, utiliza a gravidade. Para começar, vamos aquecer com alguns conceitos importantes vistos anteriormente.
 
-    >PREVIOUSLY, ON INSPER ENGINEERING…
-
-Considere a Segunda Lei e a Lei da Gravitação Universal, ambas de Newton, dadas por, e igualando em uma única equação:
-
-$$$\vec{F}=m\vec{a}=\ -\frac{GM}{r^2}\hat{r}$$$
-
-Cancelando a massa em ambos os lados da equação e escrevendo a aceleração e a derivada segunda da distância entre os corpos em termos de equações escalares de movimento, percebe-se que há conservação do momento angular $$L$$, obtendo-se facilmente:
-
-$$$\ddot{r}=\ \frac{L^2}{m^2r^3}=\ -\frac{GM}{r^2}$$$
-
-Essa equação diferencial de $$r$$ em função de $$t$$ pode ser modificada de modo que $$r$$ seja uma função de $$Θ$$ modificando a segunda derivada temporal através da regra da cadeia, resulta, então, a equação para a função $$r(Θ)$$ da qual se deriva para a equação do oscilador harmônico. Simplificando para a constante $$ε$$, denominada de constante da excentricidade orbital, chegamos em:
-
-$$$r\left(\Theta\right)=\ \left(\frac{L^2}{{GMm}^2}\right)\left(\frac{1}{1+\varepsilon\cos(\Theta-\delta)}\right)$$$
-
-Agora ficou fácil! 
-
->PERGUNTA: Observando a última equação, é possível chegar 
-em uma conclusão muito importante. Você sabe qual é?
-
-**Dica:** se a resposta não vier à sua mente em até um minuto, pule para ver a resposta. Não precisa validar esta resposta.
-
-***
-
-Prossiga após ter pensado na resposta ou ter passado mais de um minuto.
-
-
-
-###
-
-O cabeçote queimou
---------------------
-*Ah, que saudade desse cheiro de neurônio queimado… A última vez que senti esse cheiro faz tempo: foi ontem, fazendo embarcados.*
-
-Se você não conseguiu chegar em uma conclusão, não se desespere. Não era para chegar em conclusão alguma. A demonstração acima foi propositalmente feita pulando vários passos apenas para confundir. 
-    
->IMAGEM MEME NAZARÉ AQUI
-
-Talvez ficasse mais claro se fizéssemos uma demonstração mais detalhada sem pular os passos. Afinal, tudo isso lhe parece familiar, não é mesmo? Trabalhamos semestre passado com a Lei da Gravitação Universal na aula 2 de Eletromag e você deve se lembrar disso. Ou talvez não... não vou te julgar se você não lembra dessa aula em específico de 7 de agosto de 2019. 
-
-**O ponto é:** mesmo para nós que já passamos por disciplinas que fazem uso ostensivo da matemática e da física e, se estamos aqui hoje, conseguimos sobreviver a isso (ainda bem!), olhar para uma demonstração de algumas equações não parece dar uma ideia muito clara sobre como funciona um algoritmo. 
-
-Você certamente já deve ter ouvido falar de Dijkstra. Caso não, ele foi um importante cientista da computação holandês que fez importantes contribuições com o desenvolvimento de algoritmos e linguagens de programação. Não foi ele quem desenvolveu o Gravity Sort, mas os autores desse algoritmo fizeram uma citação dele no artigo em que publicaram ele. Dijkstra disse:
+Você certamente já deve ter ouvido a essa altura do campeonado falar de Dijkstra. Caso não, ele foi um importante cientista da computação holandês que fez importantes contribuições com o desenvolvimento de algoritmos e linguagens de programação. Dijkstra disse:
 
     Nossos sistemas são muito mais complicados do que 
     poderia ser considerado saudável, e são bagunçados 
@@ -56,13 +14,13 @@ Você certamente já deve ter ouvido falar de Dijkstra. Caso não, ele foi um im
 
     -- E. W. Dijkstra
 
-A partir disso, Rozenberg desenvolveu um conceito chamado que ele chamou de Computação Natural. Ou seja, se a matemática é capaz de descrever a Natureza, como vimos nas disciplinas anteriores que é possível, o contrário deve ser válido: ir de volta à Natureza, observar intuitivamente algo e usar essa ideia simples para implementar um algoritmo. 
+A partir disso, Rozenberg desenvolveu um conceito chamado que ele chamou de Computação Natural. Ou seja, observar intuitivamente algo na Natureza e usar essa ideia simples para implementar um algoritmo. E o Gravity Sort usa justamente isso: seu princípio de funcionamento é algo simples e intuitivo. 
 
-Afinal, começar pelo complicado significa não entender ou entender superficialmente e, como disse Dijkstra, é a raiz da miséria. Então, vamos começar com uma ideia simples (a ponto que até uma criança de 5 anos seja capaz de entender)* e evoluir para entender o funcionamento do Gravity Sort. 
+Veja: imagine um caminhão com algumas caixas empilhadas dentro dele em uma dada ordem. O caminhão não está lotado, apenas com algumas caixas. Porém, bate um vento forte nele e o caminhão tomba.
 
-*Dessa vez não estou zoando com sua cara!
+> ILUSTRAÇÃO caminhão
 
-Imagine um caminhão com algumas caixas empilhadas dentro dele em uma dada ordem. O caminhão não está lotado, apenas com algumas caixas. Durante o trajeto, esse caminhão sofre um acidente e tomba. 
+***
 
 >PERGUNTA: O que acontecerá com as caixas que estavam em pé quando o caminhão tombou, por efeito da gravidade?
 
@@ -78,17 +36,38 @@ Prossiga após ter pensado na resposta ou ter passado mais de um minuto.
 
 Uma maçã caindo no cocoruto
 --------------------
-Isso mesmo, as caixas tombarão também. Mais do que isso, ficarão dispostas numa ordem diferente da que estavam antes do caminhão tombar. Será que podemos usar essa ideia para que esse tombamento seja útil de alguma forma? Arulanandham (quero ver você pronunciar esse nome), Calude e Dinneen, autores do Gravity Sort, diriam que sim. 
+Isso mesmo, as caixas tombarão também. Mais do que isso, ficarão dispostas numa ordem diferente da que estavam antes do caminhão tombar. Será que podemos usar essa ideia para que esse tombamento seja útil de alguma forma? 
 
-Vamos começar pensando numa coisa um pouco mais organizada que o baú de um caminhão. Um ábaco, disposto como na imagem. Cada coluna imaginária representa um índice de um vetor e a quantidade de discos em cada coluna imaginária representa o valor do inteiro positivo existente em cada índice do vetor. 
+Arulanandham *(quero ver você pronunciar esse nome)*, Calude e Dinneen, autores do Gravity Sort, diriam que sim. 
 
->IMAGEM ÁBACO AQUI
+Vamos continuar pensando nas caixas do baú de um caminhão. Cada pilha de caixas representa um índice de um vetor e a quantidade de caixas em cada pilha representa o valor de cada índice do vetor. 
 
-Sem manipular cada disco, pense numa forma de, apenas usando a gravidade, ordenar crescentemente esse vetor, usando essa ideia de que cada coluna representa um índice.
+>ILUSTRAÇÃO AQUI
 
-Ou seja, não pode colocar os dedos nos discos, mas você pode girar o ábaco à vontade até os discos ficarem ordenados crescentemente.
+Sem manipular cada caixa, pense numa forma de, apenas inclinando o caminhão, ordenar crescentemente esse vetor, usando essa ideia de que cada coluna representa um índice.
 
->PERGUNTA: Que movimento você precisa fazer para que fiquem ordenados?
+Ou seja, não pode abrir a caçamba e reorganizar, mas pode inclinar o caminhão para os lados para que as caixas deslizem dentro do baú.
+
+>PERGUNTA: Que movimento(s) você precisa fazer para que fiquem ordenados em ordem crescente?
+
+***
+
+Não continue até ser validado.
+
+
+###
+
+E se quiser o contrário?
+--------------------
+Muito bem, sabemos que se inclinarmos o caminhão para a direita (ou colocá-lo numa ladeira abaixo) as caixas deslizarão até que as pilhas fiquem ordenadas em ordem crescente de altura.
+
+>ILUSTRAÇÃO AQUI
+
+Usando essa mesma ideia, será que conseguimos ordenar as pilhas de caixas na ordem decrescente?
+
+Ou seja, não pode abrir a caçamba e reorganizar, mas pode inclinar o caminhão para os lados para que as caixas deslizem dentro do baú.
+
+>PERGUNTA: Que movimento(s) você precisa fazer para que fiquem ordenados em ordem decrescente?
 
 ***
 
@@ -100,15 +79,17 @@ Não continue até ser validado.
 
 A ideia central
 --------------------
-Essa é a ideia central do funcionamento do Gravity Sort. Esse algoritmo também é chamado de Bead Sort, pois em inglês os discos do ábaco são assim chamados. Para os dois nomes, o algoritmo é o mesmo. Existindo uma estrutura como a do ábaco, basta girar ela para se obter o vetor ordenado crescente ou decrescentemente. 
+Essa é a ideia central do funcionamento do Gravity Sort. Esse algoritmo também é chamado de Bead Sort, pois em inglês os discos do ábaco são assim chamados. Isso porque a primeira vez que esse conceito foi apresentado foi usando um ábaco para ilustrar. Para os dois nomes, o algoritmo é o mesmo. Existindo uma estrutura como a do ábaco, basta girar ela para se obter o vetor ordenado crescente ou decrescentemente. 
 
 Aqui uma animação que representa a ideia.
 
 >ANIMAÇÃO ÁBACO AQUI
 
-Aqui outra animação que representa o algoritmo para entradas maiores.
+Aqui outra animação que representa o algoritmo para entradas maiores, usando o conceito de caixas que apresentamos antes.
 
 >ANIMAÇÃO ALGORITMO AQUI
+
+Agora que entendemos a ideia intuitiva por trás do Gravity Sort, vamos começar a pensar em formas de transformar essa ideia em algo implementável computacionalmente.
 
 ***
 
@@ -127,17 +108,40 @@ Não continue até ser validado.
 
 Implementando
 --------------------
-Essa é a maior restrição do Gravity Sort. Ele funciona bem, mas apenas para vetores contendo exclusivamente números inteiros positivos. Para qualquer coisa diferente disso, a lógica do ábaco não funciona, porque não tem como pensar em uma quantidade negativa de discos, ou uma fração de um disco. A própria lógica física da ideia central do algoritmo limita seu funcionamento a vetores com números inteiros positivos. 
+Essa é a maior restrição do Gravity Sort. Ele funciona bem, mas apenas para vetores contendo exclusivamente números inteiros positivos. 
 
-Claro, podemos pensar em algumas alternativas de gambiarra para adaptar o código para contornar essas limitações. Por exemplo, ao lidar com números negativos, podemos ter um número que soma o maior número negativo de forma a ele ficar positivo, ordena pelo Gravity Sort e então subtrai esse mesmo valor que foi somado para termos os valores originais. Sempre há um jeito de contornar limitações específicas.
+Mas… Claro, podemos pensar em algumas alternativas de gambiarra para adaptar o código para *contornar essas limitações*. Por exemplo, ao lidar com números negativos, podemos ter um número que soma o maior número negativo de forma a ele ficar positivo, ordena pelo Gravity Sort e então subtrai esse mesmo valor que foi somado para termos os valores originais. *Sempre há um jeito de contornar limitações específicas.* 
 
-Se for executado em hardware especializado, há garantia de que tenha complexidade $$O(n)$$, onde $$n$$ é o número de elementos do vetor. No exemplo, seria $$n = 5$$. Caso contrário, a implementação em software tem complexidade $$O(s)$$, onde $$s$$ é a soma de todos os elementos inteiros do vetor. No exemplo, seria $$s = 5 + 4 + 3 + 2 + 1 = 15.$$
-
-O uso de memória, porém, é $$O(n^2)$$. Um ponto curioso de sua complexidade é que no seu pior caso ele, apesar da complexidade linear, consegue ser mais rápido que $$O(n log n)$$, de acordo com demonstrações de desempenho. Isso é possível porque o Gravity Sort explora a estrutura de lidar sempre com inteiros positivos. 
-
-Pensando em software, a implementação do algoritmo em si tem uma questão: ok, a ideia parece interessante, mas como fazer isso dado um vetor na entrada da função?
+Vamos seguir pensando em nossa implementação, mas apenas pensando em vetores contendo números inteiros e positivos, por enquanto, para facilitar.
 
 De acordo com a [Wikipédia](https://en.wikipedia.org/wiki/Bead_sort#Implementation), podemos pensar em uma lista em Python com uma sequência de inteiros. A função retorna uma nova lista (ao invés de transmutar na própria lista de entrada), embora seja possível para uma operação *inplace*.
+
+>Não abra o link da Wikipédia ainda. Ele contém spoilers. E quem recebe spoilers no handout, receberá spoilers de todas as séries por 12 anos.
+
+
+CONTINUAR
+
+A PARTIR
+
+DAQUI
+
+***
+
+ATIVIDADES PARA ENTENDER
+A IMPLEMENTAÇÃO DO ALGORITMO
+
+
+
+
+
+
+
+
+
+
+###
+
+>Resto do handout anterior. Não será usado. 
 
     def gravity_sort(input_list):
     
