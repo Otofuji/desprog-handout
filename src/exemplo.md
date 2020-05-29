@@ -16,11 +16,11 @@ Você certamente já deve ter ouvido a essa altura do campeonado falar de Dijkst
 
 A partir disso, Rozenberg desenvolveu um conceito chamado que ele chamou de Computação Natural. Ou seja, observar intuitivamente algo na Natureza e usar essa ideia simples para implementar um algoritmo. E o Gravity Sort usa justamente isso: seu princípio de funcionamento é algo simples e intuitivo. 
 
+![caminhão](caminhão-1.png)
+
 Veja: imagine um caminhão com algumas caixas empilhadas dentro dele em uma dada ordem. O caminhão não está lotado, apenas com algumas caixas. Porém, bate um vento forte nele e o caminhão tomba.
 
-> ILUSTRAÇÃO caminhão
 
-***
 
 >PERGUNTA: O que acontecerá com as caixas que estavam em pé quando o caminhão tombou, por efeito da gravidade?
 
@@ -36,13 +36,16 @@ Prossiga após ter pensado na resposta ou ter passado mais de um minuto.
 
 Uma maçã caindo no cocoruto
 --------------------
+
+![tombado](90.jpeg)
+
 Isso mesmo, as caixas tombarão também. Mais do que isso, ficarão dispostas numa ordem diferente da que estavam antes do caminhão tombar. Será que podemos usar essa ideia para que esse tombamento seja útil de alguma forma? 
 
 Arulanandham *(quero ver você pronunciar esse nome)*, Calude e Dinneen, autores do Gravity Sort, diriam que sim. 
 
 Vamos continuar pensando nas caixas do baú de um caminhão. Cada pilha de caixas representa um índice de um vetor e a quantidade de caixas em cada pilha representa o valor de cada índice do vetor. 
 
->ILUSTRAÇÃO AQUI
+![caminhão vetor](caminhão-2.png)
 
 Sem manipular cada caixa, pense numa forma de, apenas inclinando o caminhão, ordenar crescentemente esse vetor, usando essa ideia de que cada coluna representa um índice.
 
@@ -57,11 +60,14 @@ Não continue até ser validado.
 
 ###
 
-E se quiser o contrário?
+Ladeiras
 --------------------
-Muito bem, sabemos que se inclinarmos o caminhão para a direita (ou colocá-lo numa ladeira abaixo) as caixas deslizarão até que as pilhas fiquem ordenadas em ordem crescente de altura.
 
->ILUSTRAÇÃO AQUI
+![caminhão subindo](caminhão-3.png)
+
+Muito bem, sabemos que se inclinarmos o caminhão para a direita (ou colocá-lo numa ladeira acima) as caixas deslizarão até que as pilhas fiquem ordenadas em ordem crescente de altura.
+
+
 
 Usando essa mesma ideia, será que conseguimos ordenar as pilhas de caixas na ordem decrescente?
 
@@ -79,15 +85,12 @@ Não continue até ser validado.
 
 A ideia central
 --------------------
+
+![caminhão descendo](caminhão-4.png)
+
 Essa é a ideia central do funcionamento do Gravity Sort. Esse algoritmo também é chamado de Bead Sort, pois em inglês os discos do ábaco são assim chamados. Isso porque a primeira vez que esse conceito foi apresentado foi usando um ábaco para ilustrar. Para os dois nomes, o algoritmo é o mesmo. Existindo uma estrutura como a do ábaco, basta girar ela para se obter o vetor ordenado crescente ou decrescentemente. 
 
-Aqui uma animação que representa a ideia.
 
->ANIMAÇÃO ÁBACO AQUI
-
-Aqui outra animação que representa o algoritmo para entradas maiores, usando o conceito de caixas que apresentamos antes.
-
->ANIMAÇÃO ALGORITMO AQUI
 
 Agora que entendemos a ideia intuitiva por trás do Gravity Sort, vamos começar a pensar em formas de transformar essa ideia em algo implementável computacionalmente.
 
