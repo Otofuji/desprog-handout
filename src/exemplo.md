@@ -21,6 +21,7 @@ Agora imagine que o caminhão está subindo uma ladeira e que essas caixas desli
 >PERGUNTA: Consegue Imaginar como as caixas ficarão dispostas?
 
 ###
+
 ![caminhão vetor](caminhão-2.png)
 
 Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort
