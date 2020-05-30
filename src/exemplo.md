@@ -12,7 +12,7 @@ Ok, mas então vamos por fim apresentá-lo
 
 Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:
 
-![caminhão](caminhão-1.png)
+![caminhão](caminhão-2.png)
 
 Veja: imagine um caminhão com algumas caixas empilhadas dentro dele em uma dada ordem. O caminhão não está lotado, apenas com algumas caixas. Porém, bate um vento forte nele e o caminhão tomba.
 
@@ -22,7 +22,7 @@ Agora imagine que o caminhão está subindo uma ladeira e que essas caixas desli
 
 ###
 
-![caminhão vetor](caminhão-2.png)
+![caminhão vetor](caminhão-3.png)
 
 Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort
 
