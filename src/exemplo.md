@@ -25,7 +25,7 @@ Agora imagine que o caminhão está subindo uma ladeira e que essas caixas desli
 
 Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort
 
-![meme_genio](meme)
+![meme_genio](meme.jpg)
 
 Inicialmente esse algoritmo foi pensado para ser demonstrado com um [ábaco](https://pt.wikipedia.org/wiki/%C3%81baco), onde, em inglês, os discos que o compõe são chamados de “bead”, então esse algoritmo também pode ser encontrado como Bead Sort.
 
