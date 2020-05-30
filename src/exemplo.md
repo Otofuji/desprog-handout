@@ -4,134 +4,54 @@ Gravity Sort
 De volta à Natureza
 --------------------
 
-Você certamente já deve ter ouvido a essa altura do campeonado falar de Dijkstra. Caso não, ele foi um importante cientista da computação holandês que fez importantes contribuições com o desenvolvimento de algoritmos e linguagens de programação. Dijkstra disse:
+Você já deve ter ouvido falar Dijkstra, um importante cientista da computação, que teve importantes contribuições para o desenvolvimento de algoritmos e linguagens de programação. A partir das ideias de Dijkstra, Rozenberg desenhou o conceito que ficou conhecido como Computação Natural, que se trata de, a partir da observação de estruturas naturais, desenvolver estruturas computacionais.
 
-    Nossos sistemas são muito mais complicados do que 
-    poderia ser considerado saudável, e são bagunçados 
-    e caóticos demais para serem usados com conforto e 
-    confiança. (...) Complexidade não dominada é a raiz 
-    da miséria.
+O Gravity Sort faz parte de uma imensa gama de algoritmos com essas características, já que se baseia na força da gravidade para a sua concepção.
 
-    -- E. W. Dijkstra
+Ok, mas então vamos por fim apresentá-lo
 
-A partir disso, Rozenberg desenvolveu um conceito chamado que ele chamou de Computação Natural. Ou seja, observar intuitivamente algo na Natureza e usar essa ideia simples para implementar um algoritmo. E o Gravity Sort usa justamente isso: seu princípio de funcionamento é algo simples e intuitivo. 
+Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:
 
 ![caminhão](caminhão-1.png)
 
 Veja: imagine um caminhão com algumas caixas empilhadas dentro dele em uma dada ordem. O caminhão não está lotado, apenas com algumas caixas. Porém, bate um vento forte nele e o caminhão tomba.
 
+Agora imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior
 
-
->PERGUNTA: O que acontecerá com as caixas que estavam em pé quando o caminhão tombou, por efeito da gravidade?
-
-**Dica**: se a resposta não vier à sua mente em até um minuto, pule para ver a resposta. Não precisa validar esta resposta.
-
-***
-
-Prossiga após ter pensado na resposta ou ter passado mais de um minuto.
-
-
+>PERGUNTA: Consegue Imaginar como as caixas ficarão dispostas?
 
 ###
-
-Uma maçã caindo no cocoruto
---------------------
-
-![tombado](90.jpeg)
-
-Isso mesmo, as caixas tombarão também. Mais do que isso, ficarão dispostas numa ordem diferente da que estavam antes do caminhão tombar. Será que podemos usar essa ideia para que esse tombamento seja útil de alguma forma? 
-
-Arulanandham *(quero ver você pronunciar esse nome)*, Calude e Dinneen, autores do Gravity Sort, diriam que sim. 
-
-Vamos continuar pensando nas caixas do baú de um caminhão. Cada pilha de caixas representa um índice de um vetor e a quantidade de caixas em cada pilha representa o valor de cada índice do vetor. 
-
 ![caminhão vetor](caminhão-2.png)
 
-Sem manipular cada caixa, pense numa forma de, apenas inclinando o caminhão, ordenar crescentemente esse vetor, usando essa ideia de que cada coluna representa um índice.
+Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort
 
-Ou seja, não pode abrir a caçamba e reorganizar, mas pode inclinar o caminhão para os lados para que as caixas deslizem dentro do baú.
+![meme_genio](meme)
 
->PERGUNTA: Que movimento(s) você precisa fazer para que fiquem ordenados em ordem crescente?
+Inicialmente esse algoritmo foi pensado para ser demonstrado com um [ábaco](https://pt.wikipedia.org/wiki/%C3%81baco), onde, em inglês, os discos que o compõe são chamados de “bead”, então esse algoritmo também pode ser encontrado como Bead Sort.
 
-***
+Mas enfim, como podemos traduzir essa movimentação que a gravidade proporciona para um código de ordenação?
 
-Não continue até ser validado.
+Primeiro precisamos de um caminhão...
 
+...mas calma, você não precisa criar um caminhão do zero, nos damos ele para você:
 
-###
+    def gravity_sort (input_list):
 
-Ladeiras
---------------------
+        # Passo 1: Construir o ábaco com a altura correta    
+            # Podemos representar o caminhão como uma lista
+            # Onde cada elemento da lista é uma “pilha” e
+            # cada "caixa" é representado com uma unidade nesse elemento 
+            # iniciamos a lista com zero em cada elemento representando o caminhão vazio
+        
+        # Passo 2: Primeiro loop -> Colocar as "caixas" no caminhão
+            # Percorremos a lista de valores iniciais e para cada um deles fazemos um novo loop
+            # nesse loop interno adicionamos 1 nas N primeiras posições da lista
+            # isso funciona como colocar empilhar as caixas em diferentes colunas.
 
-![caminhão subindo](caminhão-3.png)
-
-Muito bem, sabemos que se inclinarmos o caminhão para a direita (ou colocá-lo numa ladeira acima) as caixas deslizarão até que as pilhas fiquem ordenadas em ordem crescente de altura.
-
-
-
-Usando essa mesma ideia, será que conseguimos ordenar as pilhas de caixas na ordem decrescente?
-
-Ou seja, não pode abrir a caçamba e reorganizar, mas pode inclinar o caminhão para os lados para que as caixas deslizem dentro do baú.
-
->PERGUNTA: Que movimento(s) você precisa fazer para que fiquem ordenados em ordem decrescente?
-
-***
-
-Não continue até ser validado.
+        #Passo 3: 
+        
 
 
-
-###
-
-A ideia central
---------------------
-
-![caminhão descendo](caminhão-4.png)
-
-Essa é a ideia central do funcionamento do Gravity Sort. Esse algoritmo também é chamado de Bead Sort, pois em inglês os discos do ábaco são assim chamados. Isso porque a primeira vez que esse conceito foi apresentado foi usando um ábaco para ilustrar. Para os dois nomes, o algoritmo é o mesmo. Existindo uma estrutura como a do ábaco, basta girar ela para se obter o vetor ordenado crescente ou decrescentemente. 
-
-
-
-Agora que entendemos a ideia intuitiva por trás do Gravity Sort, vamos começar a pensar em formas de transformar essa ideia em algo implementável computacionalmente.
-
-***
-
->PERGUNTA: Se estamos lidando com o conteúdo de cada índice do vetor como o número de discos existentes no ábaco, será que existe algum tipo de restrição quanto a que tipo de conteúdo do vetor o Gravity Sort funciona?
-
-**Dica**: pense em vetores com números inteiros positivos, inteiros negativos, ponto flutuante, imaginários, strings etc., e tente imaginar como o algoritmo reagiria a esse tipo de entrada.
-
-***
-
-Não continue até ser validado.
-
-
-
-
-###
-
-Implementando
---------------------
-Essa é a maior restrição do Gravity Sort. Ele funciona bem, mas apenas para vetores contendo exclusivamente números inteiros positivos. 
-
-Mas… Claro, podemos pensar em algumas alternativas de gambiarra para adaptar o código para *contornar essas limitações*. Por exemplo, ao lidar com números negativos, podemos ter um número que soma o maior número negativo de forma a ele ficar positivo, ordena pelo Gravity Sort e então subtrai esse mesmo valor que foi somado para termos os valores originais. *Sempre há um jeito de contornar limitações específicas.* 
-
-Vamos seguir pensando em nossa implementação, mas apenas pensando em vetores contendo números inteiros e positivos, por enquanto, para facilitar.
-
-De acordo com a [Wikipédia](https://en.wikipedia.org/wiki/Bead_sort#Implementation), podemos pensar em uma lista em Python com uma sequência de inteiros. A função retorna uma nova lista (ao invés de transmutar na própria lista de entrada), embora seja possível para uma operação *inplace*.
-
->Não abra o link da Wikipédia ainda. Ele contém spoilers. E quem recebe spoilers no handout, receberá spoilers de todas as séries por 12 anos.
-
-
-CONTINUAR
-
-A PARTIR
-
-DAQUI
-
-***
-
-ATIVIDADES PARA ENTENDER
-A IMPLEMENTAÇÃO DO ALGORITMO
 
 
 
