@@ -105,17 +105,15 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
         # esse valor da soma em um vetor a ser retornado.
 
 
->Implemente o segundo loop.
+>Implemente o segundo loop como descrito acima
 
 ###
 
 
 Com a implementação do segundo loop, já temos nosso código completo.
     
-        def gravity_sort_traduzido(input_list):
-        
-        print("Lista entrada")
-        print(input_list)
+    def gravity_sort_traduzido(input_list):
+
         print("--------------------------------")
 
         return_list = []
@@ -126,8 +124,6 @@ Com a implementação do segundo loop, já temos nosso código completo.
         for num in input_list:
             for i in range(num):
                 transposed_list[i] += 1
-            print(num,transposed_list)
-                
         
         print("--------------------------------")
         print("Loop 2")
@@ -142,10 +138,8 @@ Com a implementação do segundo loop, já temos nosso código completo.
 
             for n,elem in enumerate(transposed_list):
                 transposed_list[n] -= 1
-            print("return",_,return_list)
-            print("Transposed",_,transposed_list)
 
-        return return_list
+    return return_list
 
 Um detalhe interessante no segundo loop é o check de n > 0, pode ter passado despercebido por alguns, então vale a pena observa-lo, esse chek so existe pois estamos trabalhando com um sistema inspirado no mundo físico, logo, quando n chega zero, significa que não há mais caixas na pilha. Apesar do loop continuar subtraindo uma caixa de cada andar, apenas os números positivos são considerados na contagem.
 
@@ -155,9 +149,7 @@ Mas afinal, qual é a saída desse algoritmo?
 
 ###
 
-return_list = {5,3,3,1,1}
-
-O resultado
+~ Gif com o resultado aqui ~
 
 Apesar de ser um algoritmo bem interessante, ele possui algumas limitações, que podem ser comparadas até com a sua inspiração do mundo real.
 

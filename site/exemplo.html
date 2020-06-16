@@ -119,16 +119,14 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
     # cada uma das pilhas e somar a quantidade, guardando 
     # esse valor da soma em um vetor a ser retornado.</code></pre>
 
-<blockquote><p>Implemente o segundo loop.</p></blockquote>
+<blockquote><p>Implemente o segundo loop como descrito acima</p></blockquote>
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
 <p>Com a implementação do segundo loop, já temos nosso código completo.</p>
 
-<pre class="prettybox"><code class="prettyprint">    def gravity_sort_traduzido(input_list):
+<pre class="prettybox"><code class="prettyprint">def gravity_sort_traduzido(input_list):
 
-    print(&quot;Lista entrada&quot;)
-    print(input_list)
     print(&quot;--------------------------------&quot;)
 
     return_list = []
@@ -139,8 +137,6 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
     for num in input_list:
         for i in range(num):
             transposed_list[i] += 1
-        print(num,transposed_list)
-
 
     print(&quot;--------------------------------&quot;)
     print(&quot;Loop 2&quot;)
@@ -155,10 +151,8 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
 
         for n,elem in enumerate(transposed_list):
             transposed_list[n] -= 1
-        print(&quot;return&quot;,_,return_list)
-        print(&quot;Transposed&quot;,_,transposed_list)
 
-    return return_list</code></pre>
+return return_list</code></pre>
 
 <p>Um detalhe interessante no segundo loop é o check de n &gt; 0, pode ter passado despercebido por alguns, então vale a pena observa-lo, esse chek so existe pois estamos trabalhando com um sistema inspirado no mundo físico, logo, quando n chega zero, significa que não há mais caixas na pilha. Apesar do loop continuar subtraindo uma caixa de cada andar, apenas os números positivos são considerados na contagem.</p>
 
@@ -168,9 +162,7 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
-<p>return_list = {5,3,3,1,1}</p>
-
-<p>O resultado</p>
+<p>~ Gif com o resultado aqui ~</p>
 
 <p>Apesar de ser um algoritmo bem interessante, ele possui algumas limitações, que podem ser comparadas até com a sua inspiração do mundo real.</p>
 
