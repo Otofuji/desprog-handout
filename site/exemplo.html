@@ -29,7 +29,7 @@
 
 <p>Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:</p>
 
-<p class="figure"><img alt="caminhão" src="img/caminhão-2.png" title="caminhão" class="raster"/></p>
+<p class="figure"><img alt="caminhão" src="img/Novo-caminhão.png" title="caminhão" class="raster"/></p>
 
 <p>Agora imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior</p>
 
@@ -39,7 +39,7 @@
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
-<p class="figure"><img alt="caminhão vetor" src="img/caminhão-3.png" title="caminhão vetor" class="raster"/></p>
+<p class="figure"><img alt="caminhão vetor" src="img/Novo-caminhão-2.png" title="caminhão vetor" class="raster"/></p>
 
 <p>Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort</p>
 
@@ -47,69 +47,130 @@
 
 <p>Da mesma forma, se o caminhão estiver descendo a ladeira, as caixas se organizariam de forma decrescente</p>
 
-<p class="figure"><img alt="caminhão vetor" src="img/caminhão-4.png" title="caminhão vetor" class="raster"/></p>
-
 <p>Inicialmente esse algoritmo foi pensado para ser demonstrado com um <a href="https://pt.wikipedia.org/wiki/%C3%81baco" target="_blank">ábaco</a>, onde, em inglês, os discos que o compõe são chamados de “bead”, então esse algoritmo também pode ser encontrado como Bead Sort.</p>
 
 <p>Mas enfim, como podemos traduzir essa movimentação que a gravidade proporciona para um código de ordenação?</p>
+
+<h2>Implementação</h2>
 
 <p>Primeiro precisamos de um caminhão...</p>
 
 <p>...mas calma, você não precisa criar um caminhão do zero, nos damos ele para você:</p>
 
-<p>Passo 1: Construir o caminhão com a altura correta 
-    def gravity<em>sort (input</em>list): 
-            # Podemos representar o caminhão como uma lista
-            # Onde cada elemento da lista é uma “pilha” e
-            # cada &quot;caixa&quot; é representado com uma unidade 
-            # nesse elemento, iniciamos a lista com zero em cada 
-            # elemento representando o caminhão vazio</p>
-
-<p>Passo 2: Primeiro loop -&gt; Colocar as &quot;caixas&quot; no caminhão:
-    def gravity<em>sort (input</em>list): </p>
-
-<pre class="prettybox"><code class="prettyprint">    caminhao = [0] * max(input_list)
-    return_list = []
-
-    # Percorremos a lista de valores iniciais e para cada 
-    # um deles fazemos um novo loop, nesse loop interno 
-    # adicionamos 1 nas N primeiras posições da lista
-    # isso funciona como empilhar as caixas da direita para
-    # esquerda em cada uma das colunas.
-
-    for num in input_list:
-        for i in range(num):
-            caminhao[i] += 1</code></pre>
-
-<p>Passo 3: Para o passo 3, precisariamos &quot;girar o caminhão&quot;, mas isso não é prático computacionalmente (acredito que nem na vida real)</p>
-
-<blockquote><p>Você consegue imaginar como &quot;girar&quot; esse caminhão?</p></blockquote>
-
-<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
-
-<p>A forma que encontramos não seria &quot;girar exatamente&quot;, computacionalmente, obtemos o resultado esperado fazendo a contagem ao retirar uma caixa da cada pilha, e colocando-o em um outra lista.
-O valor resultante dessa contagem é igual ao maior elemento da lista.</p>
-
-<p>Abaixo está o código da implementação completa:</p>
+<p>Passo 1: Preenchendo o caminhão :</p>
 
 <pre class="prettybox"><code class="prettyprint">def gravity_sort (input_list): 
 
-    caminhao = [0] * max(input_list)
+        # A função recebe uma lista de entrada, 
+        # onde cada valor da lista representa o número de 
+        # caixas presentes em cada pilha.</code></pre>
+
+<p>Passo 2: Primeiro loop -&gt; Inclinando o caminhão:</p>
+
+<pre class="prettybox"><code class="prettyprint">def gravity_sort (input_list): 
+
+    return_list = []
+    transposed_list = [0] * max(input_list)
+
+    # A partir da lista de entrada, se observarmos a
+    # disposição das caixas a partir da trazeira do 
+    # caminhão, temos uma lista que pode ser chama de
+    # &quot;lista de acumulação&quot;, onde cada valor dessa 
+    # lista é referente a disposição das caixas nesse 
+    # novo ponto de vista.
+
     for num in input_list:
         for i in range(num):
-            caminhao[i] += 1
-    for j in input_list:
-        sum = 0
-    for n in transposed_list:
-        if(n &gt; 0):
-            sum += 1
-    return_list.append(sum)
-    for n,elem in enumerate(transposed_list):
-        transposedlist[n] -= 1
-    print(&quot;return&quot;,,returnlist)
-    print(&quot;Transposed&quot;,,transposed_list)
+            transposed_list[i] += 1
+        print(num,transposed_list)</code></pre>
 
-return return_list</code></pre>
+<blockquote><p>Escreva o vetor de acumulação como descrito acima. </p></blockquote>
+
+<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
+
+<p class="figure"><img alt="Vetor de acumulação" src="img/Novo-caminhão-3.png" title="Vetor de acumulação" class="raster"/></p>
+
+<p>Passo 3: Segundo loop -&gt; Contando as caixas:
+A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as somar-mos temos um resultado interssante.</p>
+
+<pre class="prettybox"><code class="prettyprint">def gravity_sort(input_list):
+
+    print(&quot;Lista entrada&quot;)
+    print(input_list)
+    print(&quot;--------------------------------&quot;)
+
+    return_list = []
+    transposed_list = [0] * max(input_list)
+
+    print(&quot;Loop 1&quot;)
+
+    for num in input_list:
+        for i in range(num):
+            transposed_list[i] += 1
+        print(num,transposed_list)
+
+
+    print(&quot;--------------------------------&quot;)
+    print(&quot;Loop 2&quot;)
+
+
+    # Com a nova disposição de caixas da lista de acumulação,
+    # o segundo loop é responsável por retirar uma caixa de 
+    # cada uma das pilhas e somar a quantidade, guardando 
+    # esse valor da soma em um vetor a ser retornado.</code></pre>
+
+<blockquote><p>Implemente o segundo loop.</p></blockquote>
+
+<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
+
+<p>Com a implementação do segundo loop, já temos nosso código completo.</p>
+
+<pre class="prettybox"><code class="prettyprint">    def gravity_sort_traduzido(input_list):
+
+    print(&quot;Lista entrada&quot;)
+    print(input_list)
+    print(&quot;--------------------------------&quot;)
+
+    return_list = []
+    transposed_list = [0] * max(input_list)
+
+    print(&quot;Loop 1&quot;)
+
+    for num in input_list:
+        for i in range(num):
+            transposed_list[i] += 1
+        print(num,transposed_list)
+
+
+    print(&quot;--------------------------------&quot;)
+    print(&quot;Loop 2&quot;)
+
+    for _ in input_list:
+
+        sum = 0
+        for n in transposed_list:
+            if(n &gt; 0): 
+                sum += 1
+        return_list.append(sum)
+
+        for n,elem in enumerate(transposed_list):
+            transposed_list[n] -= 1
+        print(&quot;return&quot;,_,return_list)
+        print(&quot;Transposed&quot;,_,transposed_list)
+
+    return return_list</code></pre>
+
+<p>Um detalhe interessante no segundo loop é o check de n &gt; 0, pode ter passado despercebido por alguns, então vale a pena observa-lo, esse chek so existe pois estamos trabalhando com um sistema inspirado no mundo físico, logo, quando n chega zero, significa que não há mais caixas na pilha. Apesar do loop continuar subtraindo uma caixa de cada andar, apenas os números positivos são considerados na contagem.</p>
+
+<p>Mas afinal, qual é a saída desse algoritmo?</p>
+
+<blockquote><p>Simule o resultado da return_lista com a entrada apresentada no exemplo inicial.</p></blockquote>
+
+<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
+
+<p>return_list = {5,3,3,1,1}</p>
+
+<p>O resultado</p>
 
 <p>Apesar de ser um algoritmo bem interessante, ele possui algumas limitações, que podem ser comparadas até com a sua inspiração do mundo real.</p>
 
@@ -118,7 +179,17 @@ Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo
 
 <blockquote><p>Você consegue pensar em um estratétgia para escapar dessa limitação?</p></blockquote>
 
-<p>**Valide sua resporta</p>
+<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
+
+<h2>Complexidade</h2>
+
+<p>Agora que temos a ideia do Gravity Sort, e sua implementação, podemos falar sobre a complexidade deste algoritmo.</p>
+
+<blockquote><p>Discuta com seu grupo acerca da complexidade do Gravity Sort</p></blockquote>
+
+<p>**Valide sua resposta</p>
+
+<h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
 <blockquote><p>Fim do handout. Não fuja! Teremos um fechamento!</p></blockquote>
 
