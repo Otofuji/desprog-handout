@@ -201,6 +201,8 @@ Temos esse loop, com outros dois loops dentro, vamos chama-los de loop a e loop 
 
 Para o algoritmo completo temos uma complexidade igual a O(s+2n*max_num);
 
+É possível, simplificar essa complexidade para O(n*max_num), já que a soma e a multiplicação de constantes não afetam o tempo de porcessamento. Porém não podemos desprezar o termo max_num, onde para uma entrada pequena com grandes valores, a lista de acumulação se torna automaticamente grande, o que eleva o tempo de processamento.
+
 > Fim do handout. Não fuja! Teremos um fechamento!
 
 
