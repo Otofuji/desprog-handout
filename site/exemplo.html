@@ -84,11 +84,14 @@
             transposed_list[i] += 1
         print(num,transposed_list)</code></pre>
 
-<blockquote><p>Escreva o vetor de acumulação como descrito acima. </p></blockquote>
+<blockquote><p>Escreva o lista de acumulação como descrito acima.</p></blockquote>
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
 <p class="figure"><img alt="Vetor de acumulação" src="img/Novo-caminhão-3.png" title="Vetor de acumulação" class="raster"/></p>
+
+<p>Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação...
+ele são os mesmos, isso será importante quando discutirmos sobre complexidade. </p>
 
 <p>Passo 3: Segundo loop -&gt; Contando as caixas:
 A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as somar-mos temos um resultado interssante.</p>
@@ -179,9 +182,37 @@ Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo
 
 <blockquote><p>Discuta com seu grupo acerca da complexidade do Gravity Sort</p></blockquote>
 
+<p>*Lembre-se da relação existente entre o vetor de entrada e o vetor de acumulação.</p>
+
 <p>**Valide sua resposta</p>
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
+
+<p>Nessa implementação temos dois loops, vamos analisa-los separadamente:
+O primeiro loop:</p>
+
+<pre class="prettybox"><code class="prettyprint">for num in input_list:
+        for i in range(num):
+            transposed_list[i] += 1</code></pre>
+
+<p>Esse tem seu número de execuções igual a soma de todos os valores na input list, podemos dizer que é um O(s), onde s representa essa soma de valores;</p>
+
+<p>No segundo loop:</p>
+
+<pre class="prettybox"><code class="prettyprint">for _ in input_list:
+
+            sum = 0
+            for n in transposed_list:
+                if(n &gt; 0): 
+                    sum += 1
+            return_list.append(sum)
+
+            for n,elem in enumerate(transposed_list):
+                transposed_list[n] -= 1</code></pre>
+
+<p>Temos esse loop, com outros dois loops dentro, vamos chama-los de loop a e loop b, respectivamente. O loop a tem uma complexidade O(n(max<em>num)), já que é executado a n vezes para o tamanho da transposed</em>list, que sabemos que é igual ao maior valor de entrada. Para o loop b temos um situação semelhante ao primeiro, em que é O(n(max<em>num)). Portanto para o segundo loop, temos uma complexidade O(2n*num</em>max).</p>
+
+<p>Para o algoritmo completo temos uma complexidade igual a O(s+2n*max_num);</p>
 
 <blockquote><p>Fim do handout. Não fuja! Teremos um fechamento!</p></blockquote>
 

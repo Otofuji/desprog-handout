@@ -69,11 +69,14 @@ Passo 2: Primeiro loop -> Inclinando o caminhão:
                 transposed_list[i] += 1
             print(num,transposed_list)
 
->Escreva o vetor de acumulação como descrito acima. 
+>Escreva o lista de acumulação como descrito acima.
 
 ###
    
 ![Vetor de acumulação](Novo-caminhão-3.png)
+
+Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação...
+ele são os mesmos, isso será importante quando discutirmos sobre complexidade. 
 
 Passo 3: Segundo loop -> Contando as caixas:
 A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as somar-mos temos um resultado interssante.
@@ -166,9 +169,37 @@ Agora que temos a ideia do Gravity Sort, e sua implementação, podemos falar so
 
 >Discuta com seu grupo acerca da complexidade do Gravity Sort
 
+*Lembre-se da relação existente entre o vetor de entrada e o vetor de acumulação.
+
 **Valide sua resposta
 
 ###
+
+Nessa implementação temos dois loops, vamos analisa-los separadamente:
+O primeiro loop:
+    
+    for num in input_list:
+            for i in range(num):
+                transposed_list[i] += 1
+
+Esse tem seu número de execuções igual a soma de todos os valores na input list, podemos dizer que é um O(s), onde s representa essa soma de valores;
+
+No segundo loop:
+
+    for _ in input_list:
+
+                sum = 0
+                for n in transposed_list:
+                    if(n > 0): 
+                        sum += 1
+                return_list.append(sum)
+
+                for n,elem in enumerate(transposed_list):
+                    transposed_list[n] -= 1
+
+Temos esse loop, com outros dois loops dentro, vamos chama-los de loop a e loop b, respectivamente. O loop a tem uma complexidade O(n(max_num)), já que é executado a n vezes para o tamanho da transposed_list, que sabemos que é igual ao maior valor de entrada. Para o loop b temos um situação semelhante ao primeiro, em que é O(n(max_num)). Portanto para o segundo loop, temos uma complexidade O(2n*num_max).
+
+Para o algoritmo completo temos uma complexidade igual a O(s+2n*max_num);
 
 > Fim do handout. Não fuja! Teremos um fechamento!
 
