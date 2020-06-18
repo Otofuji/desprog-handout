@@ -19,21 +19,17 @@
 
 <h1>Gravity Sort</h1>
 
-<h2>De volta à Natureza</h2>
-
-<p>Rozenberg desenhou o conceito que ficou conhecido como Computação Natural, que se trata de, a partir da observação de estruturas naturais, desenvolver estruturas computacionais.</p>
-
 <p>O Gravity Sort faz parte de uma imensa gama de algoritmos com essas características, já que se baseia na força da gravidade para a sua concepção. Vamos por fim apresentá-lo.</p>
 
 <p>Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:</p>
 
 <p class="figure"><img alt="caminhão" src="img/Novo-caminhão.png" title="caminhão" class="raster"/></p>
 
-<p>Agora imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior</p>
+<p>Agora, imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior.</p>
 
 <blockquote><p>PERGUNTA: Desenhe como ficarão as caixas nessa situação</p></blockquote>
 
-<p>Ao terminar pode prosseguir.</p>
+<p>Ao terminar, pode prosseguir. Não precisa validar esta resposta.</p>
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
@@ -49,11 +45,11 @@
 
 <p>Inicialmente, esse algoritmo foi pensado para ser demonstrado com um <a href="https://pt.wikipedia.org/wiki/%C3%81baco" target="_blank">ábaco</a>, onde, em inglês, os discos que o compõe são chamados de “bead”. Por isso, este mesmo algoritmo também pode ser chamado de Bead Sort.</p>
 
-<p>Mas enfim, como podemos traduzir essa movimentação que a gravidade proporciona para um código de ordenação?</p>
+<p>Enfim, como podemos traduzir essa movimentação que a gravidade proporciona para um código de ordenação?</p>
 
 <p>Antes de pensar na implementação, vamos pensar em como podemos transmutar essa analogia das caixas do caminhão. </p>
 
-<p>Talvez as imagens dos caminhões que apareceram antes contenham algum spoiler que te ajude a pensar.</p>
+<p><strong>Talvez as imagens dos caminhões que apareceram antes contenham algum <em>spoiler</em> que te ajude a pensar.</strong></p>
 
 <blockquote><p>PERGUNTA: pensando em vetores, o que são são os índices do vetor e o que são os valores em cada caixa?</p></blockquote>
 
@@ -63,19 +59,21 @@
 
 <h2>Implementação</h2>
 
-<p>Primeiro precisamos de um caminhão…</p>
+<p>Cada pilha é um índice do vetor, e a quantidade de caixas em cada pilha é o valor em cada índice.</p>
+
+<p>Vamos agora seguir para a implementação do algoritmo. Primeiro precisamos de um caminhão…</p>
 
 <p>…mas calma, você não precisa criar um caminhão do zero. Nós damos ele para você:</p>
 
-<p>Passo 1: Preenchendo o caminhão:</p>
+<p><strong>Passo 1: Preenchendo o caminhão:</strong></p>
 
-<p>A função recebe uma lista de entrada, onde cada valor da lista representa o número de caixas presente em cada pilha. </p>
+<p>A função recebe uma lista de entrada, onde cada valor da lista representa o número de caixas presente em cada pilha. Lista porque trabalharemos com uma implementação em Python no handout.</p>
 
 <pre class="prettybox"><code class="prettyprint">def gravity_sort (input_list): </code></pre>
 
-<p>Passo 2: Primeiro loop -&gt; Inclinando o caminhão:</p>
+<p><strong>Passo 2: Primeiro loop -&gt; Inclinando o caminhão:</strong></p>
 
-<p>A partir da lista de entrada, se observarmos a disposição das caixas a partir da traseira do caminhão, temos uma lista que pode ser chamada de &quot;lista de acumulação&quot;, onde cada valor dessa lista é referente à disposição das caixas nesse novo ponto de vista.</p>
+<p>A partir da lista de entrada, se observarmos a disposição das caixas a partir da traseira do caminhão, temos uma lista que pode ser chamada de <code class="prettybox prettyprint">lista de acumulação</code>, onde cada valor dessa lista é referente à disposição das caixas nesse novo ponto de vista.</p>
 
 <pre class="prettybox"><code class="prettyprint">def gravity_sort (input_list): 
 
@@ -93,15 +91,17 @@
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
-<h2>Vetor de acumulação</h2>
+<h2>Um outro ponto de vista</h2>
 
 <p class="figure"><img alt="Vetor de acumulação" src="img/Novo-caminhão-3.png" title="Vetor de acumulação" class="raster"/></p>
 
-<p>Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação… eles são os mesmos! Isso será importante quando discutirmos sobre complexidade. </p>
+<p>Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação… <strong>eles são os mesmos!</strong> Isso será importante quando discutirmos sobre complexidade. </p>
+
+<p>Repare olhando para essa imagem aqui em cima com as imagens que você viu na sessão anterior. O caminhão é o mesmo e as caixas são as mesmas. Apenas estamos olhando por <em>um outro ponto de vista</em>. </p>
 
 <p>Vamos continuar com os passos.</p>
 
-<p>Passo 3: Segundo loop -&gt; Contando as caixas:</p>
+<p><strong>Passo 3: Segundo loop -&gt; Contando as caixas:</strong></p>
 
 <p>A partir do vetor de acumulação, se retirarmos uma caixa de cada pilha e as somarmos temos um resultado interssante.</p>
 
@@ -182,13 +182,15 @@ return return_list</code></pre>
 
 <p>Apesar de ser um algoritmo bem interessante, ele possui algumas limitações, que podem ser comparadas até com a sua inspiração do mundo real.</p>
 
-<p>Da mesma forma que a caixa precisa ser dotada de massa para sofrer a ação da gravidade, o Gravity Sort necessita que os numeros de entrada sejam positivos. Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo</p>
+<p>Da mesma forma que a caixa precisa ser dotada de massa para sofrer a ação da gravidade, o Gravity Sort necessita que os números de entrada sejam positivos. Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo</p>
 
 <blockquote><p>Você consegue pensar em um estratégia para escapar dessa limitação?</p></blockquote>
 
 <h3><a href="">continuar</a> ou <a href="">terminar</a></h3>
 
 <h2>Complexo?</h2>
+
+<p>Sim, se fizermos uma transformação somando os números negativos por um offset para que até mesmo o menor deles fique positivo, trabalharmos com o Gravity Sort e depois &quot;desconverter&quot; esses números usando esse mesmo offset, conseguiremos o que queremos! Essa é a beleza da computação: <em>sempre há uma gambiarra para qualquer coisa.</em></p>
 
 <p>Agora que temos a ideia do Gravity Sort, e sua implementação, podemos falar sobre a complexidade deste algoritmo.</p>
 
@@ -225,7 +227,7 @@ return return_list</code></pre>
             for n,elem in enumerate(transposed_list):
                 transposed_list[n] -= 1</code></pre>
 
-<p>Temos esse loop, com outros dois loops dentro. Vamos chamá-los de <code class="prettybox prettyprint">loop a</code> e <code class="prettybox prettyprint">loop b</code>, respectivamente. O <code class="prettybox prettyprint">loop a</code> tem uma complexidade <code class="prettybox prettyprint">O(n(max_num))</code>, já que é executado a <code class="prettybox prettyprint">n</code> vezes para o tamanho da <code class="prettybox prettyprint">transposed_list</code>, que sabemos que é igual ao maior valor de entrada. Para o <code class="prettybox prettyprint">loop b</code>, temos um situação semelhante ao primeiro, em que é <code class="prettybox prettyprint">O(n(max_num))</code>. Portanto, para o segundo loop, temos uma complexidade <code class="prettybox prettyprint">O(2n*num_max)</code>.</p>
+<p>Temos esse loop, com outros dois loops dentro. Vamos chamá-los de <code class="prettybox prettyprint">loop a</code> e <code class="prettybox prettyprint">loop b</code>, respectivamente. O <code class="prettybox prettyprint">loop a</code> tem uma complexidade <code class="prettybox prettyprint">O(n(max_num))</code>, já que é executado <code class="prettybox prettyprint">n</code> vezes para o tamanho da <code class="prettybox prettyprint">transposed_list</code>, que sabemos que é igual ao maior valor de entrada. Para o <code class="prettybox prettyprint">loop b</code>, temos um situação semelhante ao primeiro, em que é <code class="prettybox prettyprint">O(n(max_num))</code>. Portanto, para o segundo loop, temos uma complexidade <code class="prettybox prettyprint">O(2n*num_max)</code>.</p>
 
 <p>Para o algoritmo completo temos uma complexidade igual a <code class="prettybox prettyprint">O(s+2n*max_num)</code>.</p>
 
