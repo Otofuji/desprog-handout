@@ -6,9 +6,7 @@ De volta à Natureza
 
 Rozenberg desenhou o conceito que ficou conhecido como Computação Natural, que se trata de, a partir da observação de estruturas naturais, desenvolver estruturas computacionais.
 
-O Gravity Sort faz parte de uma imensa gama de algoritmos com essas características, já que se baseia na força da gravidade para a sua concepção.
-
-Ok, mas então vamos por fim apresentá-lo
+O Gravity Sort faz parte de uma imensa gama de algoritmos com essas características, já que se baseia na força da gravidade para a sua concepção. Vamos por fim apresentá-lo.
 
 Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:
 
@@ -18,68 +16,82 @@ Agora imagine que o caminhão está subindo uma ladeira e que essas caixas desli
 
 >PERGUNTA: Desenhe como ficarão as caixas nessa situação
 
-Ao terminar pode prosseguir
+Ao terminar pode prosseguir.
 
 ###
 
+A gravidade funciona
+--------------------
+
 ![caminhão vetor](Novo-caminhão-2.png)
 
-Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para traz pela gravidade...daí o nome Gravity Sort
+Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para trás pela gravidade… **daí o nome Gravity Sort!**
 
 ![meme_genio](meme.jpg)
 
-Da mesma forma, se o caminhão estiver descendo a ladeira, as caixas se organizariam de forma decrescente
+Da mesma forma, se o caminhão estiver descendo a ladeira, as caixas se organizariam de forma decrescente.
 
-Inicialmente esse algoritmo foi pensado para ser demonstrado com um [ábaco](https://pt.wikipedia.org/wiki/%C3%81baco), onde, em inglês, os discos que o compõe são chamados de “bead”, então esse algoritmo também pode ser encontrado como Bead Sort.
+Inicialmente, esse algoritmo foi pensado para ser demonstrado com um [ábaco](https://pt.wikipedia.org/wiki/%C3%81baco), onde, em inglês, os discos que o compõe são chamados de “bead”. Por isso, este mesmo algoritmo também pode ser chamado de Bead Sort.
 
 Mas enfim, como podemos traduzir essa movimentação que a gravidade proporciona para um código de ordenação?
+
+Antes de pensar na implementação, vamos pensar em como podemos transmutar essa analogia das caixas do caminhão. 
+
+Talvez as imagens dos caminhões que apareceram antes contenham algum spoiler que te ajude a pensar.
+
+>PERGUNTA: pensando em vetores, o que são são os índices do vetor e o que são os valores em cada caixa?
+
+Valide a resposta antes de prosseguir.
+
+###
 
 Implementação
 --------------------
 
-Primeiro precisamos de um caminhão...
+Primeiro precisamos de um caminhão…
 
-...mas calma, você não precisa criar um caminhão do zero, nos damos ele para você:
+…mas calma, você não precisa criar um caminhão do zero. Nós damos ele para você:
 
-Passo 1: Preenchendo o caminhão :
+Passo 1: Preenchendo o caminhão:
+
+A função recebe uma lista de entrada, onde cada valor da lista representa o número de caixas presente em cada pilha. 
     
     def gravity_sort (input_list): 
 
-            # A função recebe uma lista de entrada, 
-            # onde cada valor da lista representa o número de 
-            # caixas presentes em cada pilha.
-
+            
 
 Passo 2: Primeiro loop -> Inclinando o caminhão:
+
+A partir da lista de entrada, se observarmos a disposição das caixas a partir da traseira do caminhão, temos uma lista que pode ser chamada de "lista de acumulação", onde cada valor dessa lista é referente à disposição das caixas nesse novo ponto de vista.
     
     def gravity_sort (input_list): 
         
         return_list = []
         transposed_list = [0] * max(input_list)
-
-        # A partir da lista de entrada, se observarmos a
-        # disposição das caixas a partir da trazeira do 
-        # caminhão, temos uma lista que pode ser chama de
-        # "lista de acumulação", onde cada valor dessa 
-        # lista é referente a disposição das caixas nesse 
-        # novo ponto de vista.
         
         for num in input_list:
             for i in range(num):
                 transposed_list[i] += 1
             print(num,transposed_list)
 
->Escreva o lista de acumulação como descrito acima.
+>PERGUNTA: o que está acontecendo com o caminhão na lista de acumulação?
+
+Valide a resposta antes de prosseguir.
 
 ###
+
+Vetor de acumulação
+--------------------
    
 ![Vetor de acumulação](Novo-caminhão-3.png)
 
-Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação...
-ele são os mesmos, isso será importante quando discutirmos sobre complexidade. 
+Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação… eles são os mesmos! Isso será importante quando discutirmos sobre complexidade. 
+
+Vamos continuar com os passos.
 
 Passo 3: Segundo loop -> Contando as caixas:
-A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as somar-mos temos um resultado interssante.
+
+A partir do vetor de acumulação, se retirarmos uma caixa de cada pilha e as somarmos temos um resultado interssante.
 
     def gravity_sort(input_list):
         
@@ -100,18 +112,18 @@ A partir do vetor de acumulação, se retirar-mos uma caixa de cada pilha e as s
         
         print("--------------------------------")
         print("Loop 2")
-        
-
-        # Com a nova disposição de caixas da lista de acumulação,
-        # o segundo loop é responsável por retirar uma caixa de 
-        # cada uma das pilhas e somar a quantidade, guardando 
-        # esse valor da soma em um vetor a ser retornado.
 
 
->Implemente o segundo loop como descrito acima
+Com a nova disposição de caixas da lista de acumulação, o segundo loop é responsável por retirar uma caixa de cada uma das pilhas e somar a quantidade, guardando esse valor da soma em um vetor a ser retornado.
+
+>Implemente o segundo loop como descrito acima.
+
+Valide a resposta antes de prosseguir. Peça ajuda se travar. 
 
 ###
 
+Habemus Gravity Sort
+--------------------
 
 Com a implementação do segundo loop, já temos nosso código completo.
     
@@ -144,26 +156,30 @@ Com a implementação do segundo loop, já temos nosso código completo.
 
     return return_list
 
-Um detalhe interessante no segundo loop é o check de n > 0, pode ter passado despercebido por alguns, então vale a pena observa-lo, esse chek so existe pois estamos trabalhando com um sistema inspirado no mundo físico, logo, quando n chega zero, significa que não há mais caixas na pilha. Apesar do loop continuar subtraindo uma caixa de cada andar, apenas os números positivos são considerados na contagem.
+Um detalhe interessante no segundo loop é o check de `n > 0`, que pode ter passado despercebido por alguns. Essa verificação só existe porque estamos trabalhando com um sistema inspirado no mundo físico. Logo, quando `n` chega zero, significa que não há mais caixas na pilha. Apesar do loop continuar subtraindo uma caixa de cada andar, apenas os números positivos são considerados na contagem.
 
-Mas afinal, qual é a saída desse algoritmo?
+Mas, afinal, qual é a saída desse algoritmo?
 
 >Simule o resultado da return_lista com a entrada apresentada no exemplo inicial.
 
+Valide a resposta antes de prosseguir.
+
 ###
+
+Vamos para os finalmente: output
+--------------------
 
 ~ Gif com o resultado aqui ~
 
 Apesar de ser um algoritmo bem interessante, ele possui algumas limitações, que podem ser comparadas até com a sua inspiração do mundo real.
 
-Da mesma forma que a caixa precisa ser dotada de massa para sofrer a ação da gravidade, o Gravity Sort necessita que os numeros de entrada sejam positivos.
-Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo
+Da mesma forma que a caixa precisa ser dotada de massa para sofrer a ação da gravidade, o Gravity Sort necessita que os numeros de entrada sejam positivos. Mas ainda assim é possível trabalhar com numeros negativos com esse algoritimo
 
->Você consegue pensar em um estratétgia para escapar dessa limitação?
+>Você consegue pensar em um estratégia para escapar dessa limitação?
 
 ###
 
-Complexidade
+Complexo?
 --------------------
 Agora que temos a ideia do Gravity Sort, e sua implementação, podemos falar sobre a complexidade deste algoritmo.
 
@@ -175,14 +191,18 @@ Agora que temos a ideia do Gravity Sort, e sua implementação, podemos falar so
 
 ###
 
-Nessa implementação temos dois loops, vamos analisa-los separadamente:
+Complexidade do Gravity Sort
+--------------------
+
+Nessa implementação, temos dois loops. Vamos analisá-los separadamente:
+
 O primeiro loop:
     
     for num in input_list:
             for i in range(num):
                 transposed_list[i] += 1
 
-Esse tem seu número de execuções igual a soma de todos os valores na input list, podemos dizer que é um O(s), onde s representa essa soma de valores;
+Esse tem seu número de execuções igual à soma de todos os valores na input list. Podemos dizer que é um `O(s)`, onde `s` representa essa soma de valores;
 
 No segundo loop:
 
@@ -197,12 +217,12 @@ No segundo loop:
                 for n,elem in enumerate(transposed_list):
                     transposed_list[n] -= 1
 
-Temos esse loop, com outros dois loops dentro, vamos chama-los de loop a e loop b, respectivamente. O loop a tem uma complexidade O(n(max_num)), já que é executado a n vezes para o tamanho da transposed_list, que sabemos que é igual ao maior valor de entrada. Para o loop b temos um situação semelhante ao primeiro, em que é O(n(max_num)). Portanto para o segundo loop, temos uma complexidade O(2n*num_max).
+Temos esse loop, com outros dois loops dentro. Vamos chamá-los de `loop a` e `loop b`, respectivamente. O `loop a` tem uma complexidade `O(n(max_num))`, já que é executado a `n` vezes para o tamanho da `transposed_list`, que sabemos que é igual ao maior valor de entrada. Para o `loop b`, temos um situação semelhante ao primeiro, em que é `O(n(max_num))`. Portanto, para o segundo loop, temos uma complexidade `O(2n*num_max)`.
 
-Para o algoritmo completo temos uma complexidade igual a O(s+2n*max_num);
+Para o algoritmo completo temos uma complexidade igual a `O(s+2n*max_num)`.
 
-É possível, simplificar essa complexidade para O(n*max_num), já que a soma e a multiplicação de constantes não afetam o tempo de porcessamento. Porém não podemos desprezar o termo max_num, onde para uma entrada pequena com grandes valores, a lista de acumulação se torna automaticamente grande, o que eleva o tempo de processamento.
+É possível simplificar essa complexidade para `O(n*max_num)`, já que a soma e a multiplicação de constantes não afetam o tempo de processamento. Porém não podemos desprezar o termo `max_num`, onde para uma entrada pequena com grandes valores, a lista de acumulação se torna automaticamente grande, o que eleva o tempo de processamento.
 
-> Fim do handout. Não fuja! Teremos um fechamento!
+> Fim do handout.
 
 
