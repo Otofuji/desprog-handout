@@ -5,7 +5,7 @@ O Gravity Sort faz parte de uma imensa gama de algoritmos com essas característ
 
 Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:
 
-![caminhão](Novo-caminhão.png)
+![caminho](Novo-caminho.png)
 
 Agora, imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior.
 
@@ -18,7 +18,7 @@ Ao terminar, pode prosseguir. Não precisa validar esta resposta.
 A gravidade funciona
 --------------------
 
-![caminhão vetor](Novo-caminhão-2.png)
+![caminho vetor](Novo-caminho-2.png)
 
 Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa composição depois de serem puxadas para trás pela gravidade… **daí o nome Gravity Sort!**
 
@@ -80,7 +80,7 @@ Valide a resposta antes de prosseguir.
 Um outro ponto de vista
 --------------------
    
-![Vetor de acumulação](Novo-caminhão-3.png)
+![Vetor de acumulao](Novo-caminho-3.png)
 
 Você pode não ter notado, mas existe uma relação direta entre o maior valor existente na lista de entrada e o tamanho do vetor de acumulação… **eles são os mesmos!** Isso será importante quando discutirmos sobre complexidade. 
 
