@@ -8,19 +8,19 @@ Rozenberg desenhou o conceito que ficou conhecido como Computação Natural, que
 
 O Gravity Sort faz parte de uma imensa gama de algoritmos com essas características, já que se baseia na força da gravidade para a sua concepção.
 
-Ok, mas então vamos por fim apresentá-lo
+Ok, mas então vamos por fim apresentá-lo.
 
 Para entender a ideia podemos imaginar um caminhão carregado de caixa iguais, distribuídas em pilhas de diferentes alturas:
 
 ![caminhão](Novo-caminhão.png)
 
-As pilhas tem altura diferentes, essas alturas são referentes à entrada do nosso algoritmo. 
+As pilhas têm altura diferentes, essas alturas são referentes à entrada do nosso algoritmo. 
 
-Agora imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior
+Agora imagine que o caminhão está subindo uma ladeira e que essas caixas deslizam em seu interior.
 
->PERGUNTA: Desenhe como ficarão as caixas nessa situação
+>PERGUNTA: Desenhe como ficarão as caixas nessa situação.
 
-Ao terminar pode prosseguir
+Ao terminar pode prosseguir.
 
 ###
 
@@ -30,7 +30,7 @@ Sim, as caixas agora estão organizadas em pilhas crescentes, e adotaram essa co
 
 ![meme_genio](meme.jpg)
 
-Da mesma forma, se o caminhão estiver descendo a ladeira, as caixas se organizariam de forma decrescente
+Da mesma forma, se o caminhão estiver descendo a ladeira, as caixas se organizariam de forma decrescente.
 
 Inicialmente esse algoritmo foi pensado para ser demonstrado com um [ábaco](https://pt.wikipedia.org/wiki/%C3%81baco), onde, em inglês, os discos que o compõe são chamados de “bead”, então esse algoritmo também pode ser encontrado como Bead Sort.
 
@@ -43,7 +43,7 @@ Primeiro precisamos de um caminhão...
 
 ...mas calma, você não precisa criar um caminhão do zero, nos damos ele para você:
 
-Passo 1: Preenchendo o caminhão :
+Passo 1: Preenchendo o caminhão:
 --------------------
 
     
@@ -80,18 +80,18 @@ Vamos chamar a lista de entrada de `V[]` e a de acumulação de `A[]`.
 
 `V[0] = 1;`
 
-O algoritmo soma 1 ao primeiro indice de `A[]`
+O algoritmo soma 1 ao primeiro índice de `A[]`
 
 ``A = [1,0,0,0,0]``
 
 Para `V[1] = 3;`
 
-O algoritmo soma 1 aos três primeiros indices de `A[]`
+O algoritmo soma 1 aos três primeiros índices de `A[]`
 
 ``A = [2,1,1,0,0]``
 
 
->Após todas as interções, como ficará a lista de acumulação?
+>Após todas as interações, como ficará a lista de acumulação?
 
 *Valide sua resposta
 
@@ -118,7 +118,7 @@ Vamos chamar a lista de acumulação de `A[]` e a de retorno de `R[]`.
 
 `A = [4,3,3,1,1]`
 
-Se subtraírmos 1 de cada um dos indices:
+Se subtrairmos 1 de cada um dos índices:
 
 `A = [3,2,2,0,0]`
 
